@@ -423,6 +423,19 @@
       background-color: var(--bg-dark);
     }
 
+    /* ===== LOGO ===== */
+    .logo {
+      filter: none;
+      transition: filter 0.3s ease;
+    }
+    [data-theme="dark"] .logo {
+      filter: invert(1);
+    }
+    /* Footer is always dark — always invert */
+    .logo-always {
+      filter: invert(1) !important;
+    }
+
     /* ===== REDUCED MOTION ===== */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -444,11 +457,8 @@
     <div class="flex items-center justify-between h-20">
 
       <!-- Logo -->
-      <a href="#home" class="flex items-center gap-2 group">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, #00d4aa, #00b894);">
-          <span class="font-bold text-lg" style="color:#0a0f1a;">90</span>
-        </div>
-        <span class="text-xl font-bold text-white">Agency</span>
+      <a href="#home" class="flex items-center">
+        <img src="./images/logo.png" alt="90 Agency" class="logo h-36 w-auto" />
       </a>
 
       <!-- Desktop Nav -->
@@ -516,11 +526,8 @@
 <div id="mobile-overlay" onclick="closeMobileMenu()"></div>
 <div id="mobile-menu">
   <div class="flex items-center justify-between mb-8">
-    <a href="#home" class="flex items-center gap-2" onclick="closeMobileMenu()">
-      <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, #00d4aa, #00b894);">
-        <span class="font-bold text-sm" style="color:#0a0f1a;">90</span>
-      </div>
-      <span class="font-bold text-white">Agency</span>
+    <a href="#home" onclick="closeMobileMenu()">
+      <img src="./images/logo.png" alt="90 Agency" class="logo h-[7.5rem] w-auto" />
     </a>
     <button onclick="closeMobileMenu()" class="text-gray-400 hover:text-white transition-colors">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -729,9 +736,8 @@
               نحن نتعاون بشكل وثيق مع عملائنا لضمان تحقيق أهدافهم
             </p>
             <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-full flex items-center justify-center"
-                style="background: linear-gradient(135deg, #00d4aa, #00b894);">
-                <span class="font-bold text-sm" style="color:#0a0f1a;">90</span>
+              <div class="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center bg-white">
+                <img src="./images/logo.png" alt="90 Agency" class="logo w-24 h-24 object-contain" />
               </div>
               <div>
                 <p class="text-white font-medium text-sm">90 Agency</p>
@@ -756,14 +762,7 @@
               </svg>
             </div>
             <h3 class="text-xl font-bold text-white mb-2" data-i18n="services.webDev">تطوير الويب</h3>
-            <p class="text-gray-400 text-sm mb-4" data-i18n="services.webDevDesc">مواقع احترافية متجاوبة مع أحدث التقنيات</p>
-            <a href="#contact" class="inline-flex items-center gap-2 text-sm font-medium transition-all" style="color:#00d4aa;">
-              <span data-i18n="services.readMore">اقرأ المزيد</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14m-7-7 7 7-7 7"/>
-              </svg>
-            </a>
+            <p class="text-gray-400 text-sm" data-i18n="services.webDevDesc">مواقع احترافية متجاوبة مع أحدث التقنيات</p>
           </div>
 
           <!-- Mobile Apps -->
@@ -776,14 +775,7 @@
               </svg>
             </div>
             <h3 class="text-xl font-bold text-white mb-2" data-i18n="services.mobile">تطبيقات الموبايل</h3>
-            <p class="text-gray-400 text-sm mb-4" data-i18n="services.mobileDesc">تطبيقات iOS و Android بأداء عالي</p>
-            <a href="#contact" class="inline-flex items-center gap-2 text-sm font-medium" style="color:#00d4aa;">
-              <span data-i18n="services.readMore">اقرأ المزيد</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14m-7-7 7 7-7 7"/>
-              </svg>
-            </a>
+            <p class="text-gray-400 text-sm" data-i18n="services.mobileDesc">تطبيقات iOS و Android بأداء عالي</p>
           </div>
 
           <!-- Digital Marketing -->
@@ -796,14 +788,7 @@
               </svg>
             </div>
             <h3 class="text-xl font-bold text-white mb-2" data-i18n="services.marketing">التسويق الرقمي</h3>
-            <p class="text-gray-400 text-sm mb-4" data-i18n="services.marketingDesc">استراتيجيات تسويقية فعالة لنمو عملك</p>
-            <a href="#contact" class="inline-flex items-center gap-2 text-sm font-medium" style="color:#00d4aa;">
-              <span data-i18n="services.readMore">اقرأ المزيد</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14m-7-7 7 7-7 7"/>
-              </svg>
-            </a>
+            <p class="text-gray-400 text-sm" data-i18n="services.marketingDesc">استراتيجيات تسويقية فعالة لنمو عملك</p>
           </div>
 
           <!-- Cyber Security -->
@@ -815,14 +800,7 @@
               </svg>
             </div>
             <h3 class="text-xl font-bold text-white mb-2" data-i18n="services.security">الأمن السيبراني</h3>
-            <p class="text-gray-400 text-sm mb-4" data-i18n="services.securityDesc">حماية شاملة لبيانات وأنظمة عملك</p>
-            <a href="#contact" class="inline-flex items-center gap-2 text-sm font-medium" style="color:#00d4aa;">
-              <span data-i18n="services.readMore">اقرأ المزيد</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14m-7-7 7 7-7 7"/>
-              </svg>
-            </a>
+            <p class="text-gray-400 text-sm" data-i18n="services.securityDesc">حماية شاملة لبيانات وأنظمة عملك</p>
           </div>
 
           <!-- AI Solutions -->
@@ -835,14 +813,7 @@
               </svg>
             </div>
             <h3 class="text-xl font-bold text-white mb-2" data-i18n="services.ai">حلول الذكاء الاصطناعي</h3>
-            <p class="text-gray-400 text-sm mb-4" data-i18n="services.aiDesc">تطبيقات ذكية لأتمتة العمليات</p>
-            <a href="#contact" class="inline-flex items-center gap-2 text-sm font-medium" style="color:#00d4aa;">
-              <span data-i18n="services.readMore">اقرأ المزيد</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14m-7-7 7 7-7 7"/>
-              </svg>
-            </a>
+            <p class="text-gray-400 text-sm" data-i18n="services.aiDesc">تطبيقات ذكية لأتمتة العمليات</p>
           </div>
 
           <!-- UI/UX Design -->
@@ -856,14 +827,44 @@
               </svg>
             </div>
             <h3 class="text-xl font-bold text-white mb-2" data-i18n="services.design">تصميم UI/UX</h3>
-            <p class="text-gray-400 text-sm mb-4" data-i18n="services.designDesc">تصاميم جذابة وسهلة الاستخدام</p>
-            <a href="#contact" class="inline-flex items-center gap-2 text-sm font-medium" style="color:#00d4aa;">
-              <span data-i18n="services.readMore">اقرأ المزيد</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14m-7-7 7 7-7 7"/>
+            <p class="text-gray-400 text-sm" data-i18n="services.designDesc">تصاميم جذابة وسهلة الاستخدام</p>
+          </div>
+
+          <!-- Graphic Design -->
+          <div class="glass-card p-6 card-hover group cursor-pointer reveal delay-1">
+            <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-4" style="background: rgba(0,212,170,0.1);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                fill="none" stroke="#00d4aa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+                <path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/>
               </svg>
-            </a>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2" data-i18n="services.graphicDesign">تصميم الجرافيك</h3>
+            <p class="text-gray-400 text-sm" data-i18n="services.graphicDesignDesc">تصاميم إبداعية احترافية لعلامتك التجارية</p>
+          </div>
+
+          <!-- Logos & Visual Identity -->
+          <div class="glass-card p-6 card-hover group cursor-pointer reveal delay-2">
+            <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-4" style="background: rgba(0,212,170,0.1);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                fill="none" stroke="#00d4aa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2" data-i18n="services.logoDesign">شعارات وهويات بصرية</h3>
+            <p class="text-gray-400 text-sm" data-i18n="services.logoDesignDesc">تصميم شعارات مميزة وهوية بصرية متكاملة</p>
+          </div>
+
+          <!-- Social Media Posts & Ads -->
+          <div class="glass-card p-6 card-hover group cursor-pointer reveal delay-3">
+            <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-4" style="background: rgba(0,212,170,0.1);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                fill="none" stroke="#00d4aa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2" data-i18n="services.socialMedia">منشورات وإعلانات سوشيال ميديا</h3>
+            <p class="text-gray-400 text-sm" data-i18n="services.socialMediaDesc">تصميم منشورات وإعلانات جذابة لمنصات التواصل الاجتماعي</p>
           </div>
 
         </div>
@@ -1319,12 +1320,8 @@
 
       <!-- Brand -->
       <div class="reveal">
-        <div class="flex items-center gap-2 mb-4">
-          <div class="w-10 h-10 rounded-xl flex items-center justify-center"
-            style="background: linear-gradient(135deg, #00d4aa, #00b894);">
-            <span class="font-bold text-lg" style="color:#0a0f1a;">90</span>
-          </div>
-          <span class="text-xl font-bold text-white">Agency</span>
+        <div class="mb-4">
+          <a href="#home"><img src="./images/logo.png" alt="90 Agency" class="logo logo-always h-36 w-auto" /></a>
         </div>
         <p class="text-gray-400 mb-6 text-sm" data-i18n="footer.tagline">نحول الأفكار ٩٠ درجة نحو النجاح</p>
         <div class="flex gap-3">
@@ -1476,7 +1473,7 @@
       hero: { label:'التميز الرقمي بلا حدود', headline:'نحول الأفكار ٩٠ درجة نحو النجاح', subheadline:'وكالة رقمية متكاملة متخصصة في البرمجة، التسويق الرقمي، والتصميم الإبداعي', cta1:'اتصل بنا', cta2:'اعرف المزيد' },
       stats: { clients:'عميل سعيد', projects:'مشروع منجز', experience:'سنوات خبرة' },
       about: { label:'من نحن', headline:'نكشف عن جوهر مهمتنا التقنية', description:'شركة فلسطينية رائدة متخصصة في تطوير الأعمال، الخدمات البرمجية، وخدمات التسويق الرقمي. نحن نقدم حلول مبتكرة تساعد عملائنا على التميز والنمو في السوق الرقمي.', feature1:'حلول مخصصة لاحتياجات عملك', feature2:'فريق من الخبراء والمتخصصين', feature3:'دعم فني على مدار الساعة', cta1:'اقرأ المزيد', cta2:'احصل على استشارة' },
-      services: { label:'خدماتنا', headline:'نشكل المستقبل بالابتكار التقني', quote:'نحن نتعاون بشكل وثيق مع عملائنا لضمان تحقيق أهدافهم', webDev:'تطوير الويب', webDevDesc:'مواقع احترافية متجاوبة مع أحدث التقنيات', mobile:'تطبيقات الموبايل', mobileDesc:'تطبيقات iOS و Android بأداء عالي', marketing:'التسويق الرقمي', marketingDesc:'استراتيجيات تسويقية فعالة لنمو عملك', security:'الأمن السيبراني', securityDesc:'حماية شاملة لبيانات وأنظمة عملك', ai:'حلول الذكاء الاصطناعي', aiDesc:'تطبيقات ذكية لأتمتة العمليات', design:'تصميم UI/UX', designDesc:'تصاميم جذابة وسهلة الاستخدام', readMore:'اقرأ المزيد' },
+      services: { label:'خدماتنا', headline:'نشكل المستقبل بالابتكار التقني', quote:'نحن نتعاون بشكل وثيق مع عملائنا لضمان تحقيق أهدافهم', webDev:'تطوير الويب', webDevDesc:'مواقع احترافية متجاوبة مع أحدث التقنيات', mobile:'تطبيقات الموبايل', mobileDesc:'تطبيقات iOS و Android بأداء عالي', marketing:'التسويق الرقمي', marketingDesc:'استراتيجيات تسويقية فعالة لنمو عملك', security:'الأمن السيبراني', securityDesc:'حماية شاملة لبيانات وأنظمة عملك', ai:'حلول الذكاء الاصطناعي', aiDesc:'تطبيقات ذكية لأتمتة العمليات', design:'تصميم UI/UX', designDesc:'تصاميم جذابة وسهلة الاستخدام', graphicDesign:'تصميم الجرافيك', graphicDesignDesc:'تصاميم إبداعية احترافية لعلامتك التجارية', logoDesign:'شعارات وهويات بصرية', logoDesignDesc:'تصميم شعارات مميزة وهوية بصرية متكاملة', socialMedia:'منشورات وإعلانات سوشيال ميديا', socialMediaDesc:'تصميم منشورات وإعلانات جذابة لمنصات التواصل الاجتماعي' },
       whyUs: { label:'لماذا تختارنا', headline:'نبني حلول رقمية مخصصة لك', badge:'سنوات خبرة', satisfaction:'رضا العملاء', performance:'الأداء والسرعة', reliability:'الموثوقية' },
       howItWorks: { label:'كيف نعمل', headline:'بسطنا الإجراءات المعقدة', step1:'تقييم واستشارة', step1Desc:'نبدأ بفهم احتياجاتك وأهدافك بشكل شامل', step2:'مخطط الحلول المخصصة', step2Desc:'نصمم خطة عمل مفصلة تناسب متطلباتك', step3:'التنفيذ والدعم المستمر', step3Desc:'ننفذ المشروع ونوفر دعماً مستمراً' },
       portfolio: { label:'أعمالنا', headline:'أحدث مشاريعنا التي تم إنجازها', project1:'إعادة تصميم موقع تجارة إلكترونية', project2:'حملة سوشيال ميديا لشركة ناشئة', project3:'تطوير تطبيق موبايل للصحة', project4:'تحسين محركات البحث SEO', viewProject:'عرض المشروع' },
@@ -1493,7 +1490,7 @@
       hero: { label:'DIGITAL MASTERY UNLEASHED', headline:'Transforming Ideas 90 Degrees Toward Success', subheadline:'A full-service digital agency specializing in development, digital marketing, and creative design', cta1:'Contact Us', cta2:'Learn More' },
       stats: { clients:'Happy Clients', projects:'Projects Completed', experience:'Years Experience' },
       about: { label:'About Us', headline:'Unveiling The Essence Of Our Tech Mission', description:'A leading Palestinian company specializing in business development, software services, and digital marketing. We provide innovative solutions that help our clients excel and grow in the digital market.', feature1:'Solutions tailored to your business needs', feature2:'Team of experts and specialists', feature3:'24/7 technical support', cta1:'Read More', cta2:'Get Consultation' },
-      services: { label:'Our Services', headline:"Shaping Tomorrow's With Tech Innovation", quote:'We collaborate closely with our clients to ensure their objectives are achieved', webDev:'Web Development', webDevDesc:'Professional responsive websites with latest technologies', mobile:'Mobile Apps', mobileDesc:'High-performance iOS and Android applications', marketing:'Digital Marketing', marketingDesc:'Effective marketing strategies for business growth', security:'Cyber Security', securityDesc:'Comprehensive protection for your data and systems', ai:'AI Solutions', aiDesc:'Smart applications for process automation', design:'UI/UX Design', designDesc:'Attractive and user-friendly designs', readMore:'Read More' },
+      services: { label:'Our Services', headline:"Shaping Tomorrow's With Tech Innovation", quote:'We collaborate closely with our clients to ensure their objectives are achieved', webDev:'Web Development', webDevDesc:'Professional responsive websites with latest technologies', mobile:'Mobile Apps', mobileDesc:'High-performance iOS and Android applications', marketing:'Digital Marketing', marketingDesc:'Effective marketing strategies for business growth', security:'Cyber Security', securityDesc:'Comprehensive protection for your data and systems', ai:'AI Solutions', aiDesc:'Smart applications for process automation', design:'UI/UX Design', designDesc:'Attractive and user-friendly designs', graphicDesign:'Graphic Design', graphicDesignDesc:'Professional creative designs for your brand', logoDesign:'Logos & Visual Identity', logoDesignDesc:'Distinctive logo design and complete visual identity', socialMedia:'Social Media Posts & Ads', socialMediaDesc:'Attractive posts and ad designs for social media platforms' },
       whyUs: { label:'Why Choose Us', headline:'Building Digital Solutions Tailored For You', badge:'Years Of Experience', satisfaction:'Client Satisfaction', performance:'Performance', reliability:'Reliability' },
       howItWorks: { label:'How It Works', headline:'Easily Simplify Complicated Procedures', step1:'Assessment & Consultation', step1Desc:'We start by understanding your needs and goals comprehensively', step2:'Tailored Solutions Blueprint', step2Desc:'We design a detailed action plan that suits your requirements', step3:'Implementation And Ongoing Support', step3Desc:'We implement the project and provide continuous support' },
       portfolio: { label:'Portfolio', headline:"Here's Our Latest Project That Has Been Done", project1:'E-Commerce Website Redesign', project2:'Social Media Campaign For Tech Startup', project3:'Health Mobile App Development', project4:'Search Engine Optimization SEO', viewProject:'View Project' },
