@@ -385,6 +385,68 @@
     }
     .portfolio-card:hover .border-glow { border-color: rgba(0, 212, 170, 0.5); }
 
+    /* ===== PORTFOLIO MODAL ===== */
+    #portfolio-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.88);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    #portfolio-modal.open { display: flex; }
+    #portfolio-modal .modal-inner {
+      position: relative;
+      background: var(--card-bg, rgba(15,20,35,0.97));
+      border: 1px solid rgba(0,212,170,0.35);
+      border-radius: 1.5rem;
+      overflow: hidden;
+      max-width: 820px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.88) translateY(24px); }
+      to   { opacity: 1; transform: scale(1)    translateY(0);    }
+    }
+    #portfolio-modal .modal-img-wrap {
+      position: relative;
+      overflow: hidden;
+      max-height: 420px;
+    }
+    #portfolio-modal .modal-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    #portfolio-modal .modal-close {
+      position: absolute;
+      top: 0.875rem;
+      right: 0.875rem;
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(0,212,170,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 20;
+      color: white;
+      transition: background 0.2s, transform 0.2s;
+    }
+    #portfolio-modal .modal-close:hover { background: rgba(0,212,170,0.35); transform: scale(1.1); }
+    .modal-description { white-space: pre-line; line-height: 1.85; }
+    #portfolio-modal:not(.open) { pointer-events: none; }
+
     /* ===== BLOG CARD ===== */
     .blog-card img { transition: transform 0.5s ease; }
     .blog-card:hover img { transform: scale(1.1); }
@@ -1035,98 +1097,116 @@
       <div class="text-center mb-16 reveal">
         <span class="section-label" data-i18n="portfolio.label">أعمالنا</span>
         <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white"
-          data-i18n="portfolio.headline">أحدث مشاريعنا التي تم إنجازها</h2>
+          data-i18n="portfolio.headline">أحدث أعمالنا</h2>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-        <!-- Project 1 -->
-        <div class="portfolio-card group relative overflow-hidden rounded-2xl cursor-pointer reveal delay-1">
+        <!-- Project 1 – Restaurant -->
+        <div class="portfolio-card group relative overflow-hidden rounded-2xl cursor-pointer reveal delay-1"
+          data-project-idx="0" onclick="openPortfolioModal(0)">
           <div class="aspect-[4/3] overflow-hidden">
-            <img src="./images/portfolio-1.jpg" alt="E-Commerce Redesign"
+            <img src="./images/portfolio/restaurant.jpg" alt="Restaurant Designs"
               class="w-full h-full object-cover" loading="lazy" />
           </div>
           <div class="overlay absolute inset-0 flex flex-col justify-end p-6"
-            style="background: linear-gradient(to top, #0a0f1a, rgba(10,15,26,0.5), transparent);">
-            <span class="text-sm font-medium mb-2" style="color:#00d4aa;">Web Development</span>
-            <h3 class="text-xl font-bold text-white mb-3" data-i18n="portfolio.project1">إعادة تصميم موقع تجارة إلكترونية</h3>
-            <button class="inline-flex items-center gap-2 text-sm font-medium" style="color:#00d4aa;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+            style="background: linear-gradient(to top, rgba(10,15,26,0.95), rgba(10,15,26,0.5), transparent);">
+            <h3 class="text-lg font-bold text-white mb-3" data-i18n="portfolio.project1">تصاميم مطاعم</h3>
+            <span class="inline-flex items-center gap-2 text-sm font-medium" style="color:#00d4aa;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                <polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/>
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
               </svg>
-              <span data-i18n="portfolio.viewProject">عرض المشروع</span>
-            </button>
+              <span data-i18n="portfolio.viewDetails">عرض التفاصيل</span>
+            </span>
           </div>
           <div class="border-glow"></div>
         </div>
 
-        <!-- Project 2 -->
-        <div class="portfolio-card group relative overflow-hidden rounded-2xl cursor-pointer reveal delay-2">
+        <!-- Project 2 – Cleaning Products -->
+        <div class="portfolio-card group relative overflow-hidden rounded-2xl cursor-pointer reveal delay-2"
+          data-project-idx="1" onclick="openPortfolioModal(1)">
           <div class="aspect-[4/3] overflow-hidden">
-            <img src="./images/portfolio-2.jpg" alt="Social Media Campaign"
+            <img src="./images/portfolio/cleaning.jpg" alt="Cleaning Products Designs"
               class="w-full h-full object-cover" loading="lazy" />
           </div>
           <div class="overlay absolute inset-0 flex flex-col justify-end p-6"
-            style="background: linear-gradient(to top, #0a0f1a, rgba(10,15,26,0.5), transparent);">
-            <span class="text-sm font-medium mb-2" style="color:#00d4aa;">Digital Marketing</span>
-            <h3 class="text-xl font-bold text-white mb-3" data-i18n="portfolio.project2">حملة سوشيال ميديا لشركة ناشئة</h3>
-            <button class="inline-flex items-center gap-2 text-sm font-medium" style="color:#00d4aa;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+            style="background: linear-gradient(to top, rgba(10,15,26,0.95), rgba(10,15,26,0.5), transparent);">
+            <h3 class="text-lg font-bold text-white mb-3" data-i18n="portfolio.project2">تصاميم منتجات تنظيف</h3>
+            <span class="inline-flex items-center gap-2 text-sm font-medium" style="color:#00d4aa;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                <polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/>
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
               </svg>
-              <span data-i18n="portfolio.viewProject">عرض المشروع</span>
-            </button>
+              <span data-i18n="portfolio.viewDetails">عرض التفاصيل</span>
+            </span>
           </div>
           <div class="border-glow"></div>
         </div>
 
-        <!-- Project 3 -->
-        <div class="portfolio-card group relative overflow-hidden rounded-2xl cursor-pointer reveal delay-3">
+        <!-- Project 3 – Clothes Printing -->
+        <div class="portfolio-card group relative overflow-hidden rounded-2xl cursor-pointer reveal delay-3"
+          data-project-idx="2" onclick="openPortfolioModal(2)">
           <div class="aspect-[4/3] overflow-hidden">
-            <img src="./images/portfolio-3.jpg" alt="Health Mobile App"
+            <img src="./images/portfolio/clothes-printing.jpg" alt="Custom Hoodie Printing"
               class="w-full h-full object-cover" loading="lazy" />
           </div>
           <div class="overlay absolute inset-0 flex flex-col justify-end p-6"
-            style="background: linear-gradient(to top, #0a0f1a, rgba(10,15,26,0.5), transparent);">
-            <span class="text-sm font-medium mb-2" style="color:#00d4aa;">Mobile App</span>
-            <h3 class="text-xl font-bold text-white mb-3" data-i18n="portfolio.project3">تطوير تطبيق موبايل للصحة</h3>
-            <button class="inline-flex items-center gap-2 text-sm font-medium" style="color:#00d4aa;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+            style="background: linear-gradient(to top, rgba(10,15,26,0.95), rgba(10,15,26,0.5), transparent);">
+            <h3 class="text-lg font-bold text-white mb-3" data-i18n="portfolio.project3">تصميم وطباعة هوديز</h3>
+            <span class="inline-flex items-center gap-2 text-sm font-medium" style="color:#00d4aa;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                <polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/>
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
               </svg>
-              <span data-i18n="portfolio.viewProject">عرض المشروع</span>
-            </button>
+              <span data-i18n="portfolio.viewDetails">عرض التفاصيل</span>
+            </span>
           </div>
           <div class="border-glow"></div>
         </div>
 
-        <!-- Project 4 -->
-        <div class="portfolio-card group relative overflow-hidden rounded-2xl cursor-pointer reveal delay-4">
+        <!-- Project 4 – Beauty & Care -->
+        <div class="portfolio-card group relative overflow-hidden rounded-2xl cursor-pointer reveal delay-4"
+          data-project-idx="3" onclick="openPortfolioModal(3)">
           <div class="aspect-[4/3] overflow-hidden">
-            <img src="./images/portfolio-4.jpg" alt="SEO Optimization"
+            <img src="./images/portfolio/beauty.jpg" alt="Beauty Care Designs"
               class="w-full h-full object-cover" loading="lazy" />
           </div>
           <div class="overlay absolute inset-0 flex flex-col justify-end p-6"
-            style="background: linear-gradient(to top, #0a0f1a, rgba(10,15,26,0.5), transparent);">
-            <span class="text-sm font-medium mb-2" style="color:#00d4aa;">SEO</span>
-            <h3 class="text-xl font-bold text-white mb-3" data-i18n="portfolio.project4">تحسين محركات البحث SEO</h3>
-            <button class="inline-flex items-center gap-2 text-sm font-medium" style="color:#00d4aa;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+            style="background: linear-gradient(to top, rgba(10,15,26,0.95), rgba(10,15,26,0.5), transparent);">
+            <h3 class="text-lg font-bold text-white mb-3" data-i18n="portfolio.project4">تصاميم العناية</h3>
+            <span class="inline-flex items-center gap-2 text-sm font-medium" style="color:#00d4aa;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                <polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/>
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
               </svg>
-              <span data-i18n="portfolio.viewProject">عرض المشروع</span>
-            </button>
+              <span data-i18n="portfolio.viewDetails">عرض التفاصيل</span>
+            </span>
           </div>
           <div class="border-glow"></div>
         </div>
+
+        <!-- Project 5 – Miscellaneous -->
+        <div class="portfolio-card group relative overflow-hidden rounded-2xl cursor-pointer reveal delay-1 sm:col-span-2 lg:col-span-1"
+          data-project-idx="4" onclick="openPortfolioModal(4)">
+          <div class="aspect-[4/3] overflow-hidden">
+            <img src="./images/portfolio/Miscellaneous.jpg" alt="Various Industry Designs"
+              class="w-full h-full object-cover" loading="lazy" />
+          </div>
+          <div class="overlay absolute inset-0 flex flex-col justify-end p-6"
+            style="background: linear-gradient(to top, rgba(10,15,26,0.95), rgba(10,15,26,0.5), transparent);">
+            <h3 class="text-lg font-bold text-white mb-3" data-i18n="portfolio.project5">تصاميم متنوعة</h3>
+            <span class="inline-flex items-center gap-2 text-sm font-medium" style="color:#00d4aa;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+              </svg>
+              <span data-i18n="portfolio.viewDetails">عرض التفاصيل</span>
+            </span>
+          </div>
+          <div class="border-glow"></div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1476,7 +1556,7 @@
       services: { label:'خدماتنا', headline:'نشكل المستقبل بالابتكار التقني', quote:'نحن نتعاون بشكل وثيق مع عملائنا لضمان تحقيق أهدافهم', webDev:'تطوير الويب', webDevDesc:'مواقع احترافية متجاوبة مع أحدث التقنيات', mobile:'تطبيقات الموبايل', mobileDesc:'تطبيقات iOS و Android بأداء عالي', marketing:'التسويق الرقمي', marketingDesc:'استراتيجيات تسويقية فعالة لنمو عملك', security:'الأمن السيبراني', securityDesc:'حماية شاملة لبيانات وأنظمة عملك', ai:'حلول الذكاء الاصطناعي', aiDesc:'تطبيقات ذكية لأتمتة العمليات', design:'تصميم UI/UX', designDesc:'تصاميم جذابة وسهلة الاستخدام', graphicDesign:'تصميم الجرافيك', graphicDesignDesc:'تصاميم إبداعية احترافية لعلامتك التجارية', logoDesign:'شعارات وهويات بصرية', logoDesignDesc:'تصميم شعارات مميزة وهوية بصرية متكاملة', socialMedia:'منشورات وإعلانات سوشيال ميديا', socialMediaDesc:'تصميم منشورات وإعلانات جذابة لمنصات التواصل الاجتماعي' },
       whyUs: { label:'لماذا تختارنا', headline:'نبني حلول رقمية مخصصة لك', badge:'سنوات خبرة', satisfaction:'رضا العملاء', performance:'الأداء والسرعة', reliability:'الموثوقية' },
       howItWorks: { label:'كيف نعمل', headline:'بسطنا الإجراءات المعقدة', step1:'تقييم واستشارة', step1Desc:'نبدأ بفهم احتياجاتك وأهدافك بشكل شامل', step2:'مخطط الحلول المخصصة', step2Desc:'نصمم خطة عمل مفصلة تناسب متطلباتك', step3:'التنفيذ والدعم المستمر', step3Desc:'ننفذ المشروع ونوفر دعماً مستمراً' },
-      portfolio: { label:'أعمالنا', headline:'أحدث مشاريعنا التي تم إنجازها', project1:'إعادة تصميم موقع تجارة إلكترونية', project2:'حملة سوشيال ميديا لشركة ناشئة', project3:'تطوير تطبيق موبايل للصحة', project4:'تحسين محركات البحث SEO', viewProject:'عرض المشروع' },
+      portfolio: { label:'أعمالنا', headline:'أحدث أعمالنا', project1:'تصاميم مطاعم', project2:'تصاميم منتجات تنظيف', project3:'تصميم وطباعة هوديز', project4:'تصاميم العناية', project5:'تصاميم متنوعة', viewDetails:'عرض التفاصيل' },
       testimonials: { label:'آراء العملاء', headline:'قصص نجاح عملائنا' },
       blog: { label:'مدونتنا', headline:'اقرأ أحدث مقالاتنا', viewAll:'عرض الكل', post1:'مستقبل الذكاء الاصطناعي في الأعمال', post2:'استراتيجيات التسويق الرقمي الفعالة', post3:'أفضل ممارسات تطوير الويب 2024' },
       cta: { headline:'حول عملك رقمياً!', button:'تواصل معنا' },
@@ -1493,7 +1573,7 @@
       services: { label:'Our Services', headline:"Shaping Tomorrow's With Tech Innovation", quote:'We collaborate closely with our clients to ensure their objectives are achieved', webDev:'Web Development', webDevDesc:'Professional responsive websites with latest technologies', mobile:'Mobile Apps', mobileDesc:'High-performance iOS and Android applications', marketing:'Digital Marketing', marketingDesc:'Effective marketing strategies for business growth', security:'Cyber Security', securityDesc:'Comprehensive protection for your data and systems', ai:'AI Solutions', aiDesc:'Smart applications for process automation', design:'UI/UX Design', designDesc:'Attractive and user-friendly designs', graphicDesign:'Graphic Design', graphicDesignDesc:'Professional creative designs for your brand', logoDesign:'Logos & Visual Identity', logoDesignDesc:'Distinctive logo design and complete visual identity', socialMedia:'Social Media Posts & Ads', socialMediaDesc:'Attractive posts and ad designs for social media platforms' },
       whyUs: { label:'Why Choose Us', headline:'Building Digital Solutions Tailored For You', badge:'Years Of Experience', satisfaction:'Client Satisfaction', performance:'Performance', reliability:'Reliability' },
       howItWorks: { label:'How It Works', headline:'Easily Simplify Complicated Procedures', step1:'Assessment & Consultation', step1Desc:'We start by understanding your needs and goals comprehensively', step2:'Tailored Solutions Blueprint', step2Desc:'We design a detailed action plan that suits your requirements', step3:'Implementation And Ongoing Support', step3Desc:'We implement the project and provide continuous support' },
-      portfolio: { label:'Portfolio', headline:"Here's Our Latest Project That Has Been Done", project1:'E-Commerce Website Redesign', project2:'Social Media Campaign For Tech Startup', project3:'Health Mobile App Development', project4:'Search Engine Optimization SEO', viewProject:'View Project' },
+      portfolio: { label:'Portfolio', headline:"Here's Our Latest Work", project1:'Restaurant Designs', project2:'Cleaning Products Designs', project3:'Custom Hoodie Printing', project4:'Beauty & Care Designs', project5:'Various Industries', viewDetails:'View Details' },
       testimonials: { label:'Testimonials', headline:'Client Success Stories' },
       blog: { label:'Our Blog', headline:'Read Our Latest Blogs', viewAll:'View All', post1:'The Future of AI in Business', post2:'Effective Digital Marketing Strategies', post3:'Best Web Development Practices 2024' },
       cta: { headline:'Transform Your Business Digitally!', button:'Contact Us' },
@@ -1503,6 +1583,108 @@
       facebook:'Follow us on Facebook',
     }
   };
+
+  // ===== PORTFOLIO PROJECT DATA =====
+  const portfolioData = {
+    ar: [
+      {
+        img: './images/portfolio/restaurant.jpg',
+        title: 'تصاميم إعلانية احترافية في مجال المطاعم 🍔🍕',
+        desc: 'نموذج من أعمالنا يبرز قدرتنا على تحويل الأطباق والعروض إلى تصاميم شهية تلفت النظر وتحرّك الطلب\n\n🔹 تصاميم جذابة تعكس هوية المطعم\n🔹 إبراز العروض والوجبات بطريقة مشوّقة\n🔹 ألوان قوية تفتح الشهية\n🔹 جاهزة للسوشيال ميديا والإعلانات الممولة'
+      },
+      {
+        img: './images/portfolio/cleaning.jpg',
+        title: 'تصاميم إعلانية احترافية في مجال منتجات التنظيف 🧼✨',
+        desc: 'نموذج من أعمالنا يبرز قوة المنتج، النظافة، والنتيجة من أول نظرة\n\n🔹 تصاميم واضحة تبرز فاعلية المنتج\n🔹 ألوان نظيفة ومريحة للعين\n🔹 إبراز قبل / بعد بطريقة ذكية\n🔹 جاهزة للسوشيال ميديا والإعلانات الممولة\n\n📈 خلي منتجك يثبت جودته بالصورة'
+      },
+      {
+        img: './images/portfolio/clothes-printing.jpg',
+        title: 'لما يكون الزي جزء من هوية شركتك، مش مجرد قطعة لبس.',
+        desc: 'نقدّم في 90° Agency خدمة تصميم وطباعة هوديز مخصّصة للشركات، المحلات، والمطاعم، بأسلوب احترافي يعكس هوية فريقك ويعطي انطباع قوي من أول نظرة.\n\n✔️ تصميم حسب الهوية\n✔️ طباعة عالية الجودة\n✔️ مناسبة لفرق العمل والعلامات التجارية'
+      },
+      {
+        img: './images/portfolio/beauty.jpg',
+        title: 'تصاميم إعلانية احترافية في مجال العناية 💆‍♀️🧴',
+        desc: 'نموذج من أعمالنا يبرز جمال المنتج، الإحساس، والنتيجة بأسلوب أنيق وجذاب\n\n🔹 تصاميم ناعمة تعكس الجودة والاهتمام\n🔹 ألوان متناسقة تناسب منتجات العناية\n🔹 إبراز الفوائد بطريقة جذابة وواضحة\n🔹 جاهزة للسوشيال ميديا والإعلانات الممولة\n\n🌸 لأن العناية تبدأ من الانطباع الأول'
+      },
+      {
+        img: './images/portfolio/Miscellaneous.jpg',
+        title: '✨ تصاميم إعلانية في مجالات متنوعة ✨',
+        desc: '🔹 إعلان مكيفات بأسلوب واضح وجذاب\n🔹 عرض عيد الفطر لشركة سياحة ✈️🌙\n🔹 تصميم يبرز خيارات دفع متعددة لمحل تجاري\n\nنركّز في تصاميمنا على وضوح الفكرة، قوة العرض، وجذب الانتباه بما يخدم هدف الإعلان ويزيد التفاعل'
+      }
+    ],
+    en: [
+      {
+        img: './images/portfolio/restaurant.jpg',
+        title: 'Professional Advertising Designs for the Restaurant Industry 🍔🍕',
+        desc: "A showcase from our work highlighting our ability to transform dishes and offers into appetizing designs that attract attention and drive demand\n\n🔹 Attractive designs reflecting the restaurant's identity\n🔹 Highlighting offers and meals in an engaging way\n🔹 Strong colors that stimulate appetite\n🔹 Ready for social media and paid ads"
+      },
+      {
+        img: './images/portfolio/cleaning.jpg',
+        title: 'Professional Advertising Designs for Cleaning Products 🧼✨',
+        desc: 'A showcase from our work highlighting product strength, cleanliness, and results at first glance\n\n🔹 Clear designs that highlight product effectiveness\n🔹 Clean and eye-friendly colors\n🔹 Smart before/after presentation\n🔹 Ready for social media and paid ads\n\n📈 Let your product prove its quality through imagery'
+      },
+      {
+        img: './images/portfolio/clothes-printing.jpg',
+        title: 'When Uniforms Are Part of Your Brand Identity',
+        desc: "Not just a piece of clothing.\nAt 90° Agency, we offer custom hoodie design & printing for companies, shops, and restaurants — with a professional style that reflects your team's identity and makes a strong first impression.\n\n✔️ Design tailored to your brand identity\n✔️ High-quality printing\n✔️ Perfect for work teams and brands"
+      },
+      {
+        img: './images/portfolio/beauty.jpg',
+        title: 'Professional Advertising Designs for the Beauty & Care Industry 💆‍♀️🧴',
+        desc: 'A showcase from our work highlighting product beauty, feel, and results in an elegant and attractive style\n\n🔹 Soft designs reflecting quality and care\n🔹 Harmonious colors suited to care products\n🔹 Attractive and clear benefit highlights\n🔹 Ready for social media and paid ads\n\n🌸 Because care starts from the first impression'
+      },
+      {
+        img: './images/portfolio/Miscellaneous.jpg',
+        title: '✨ Advertising Designs for Various Industries ✨',
+        desc: '🔹 AC unit ad in a clear and attractive style\n🔹 Eid Al-Fitr offer for a travel company ✈️🌙\n🔹 Design highlighting multiple payment options for a retail store\n\nWe focus on clarity of message, powerful presentation, and capturing attention — in service of the ad\'s goal to increase engagement'
+      }
+    ]
+  };
+
+  // ===== PORTFOLIO MODAL =====
+  function openPortfolioModal(idx) {
+    const lang = currentLang || 'ar';
+    const project = portfolioData[lang][idx];
+    if (!project) return;
+
+    const modal = document.getElementById('portfolio-modal');
+    const img   = document.getElementById('modal-img');
+    const title = document.getElementById('modal-title-el');
+    const desc  = document.getElementById('modal-desc-el');
+
+    img.src = project.img;
+    img.alt = project.title;
+    title.textContent = project.title;
+    desc.textContent  = project.desc;
+
+    // Direction
+    const dir = lang === 'ar' ? 'rtl' : 'ltr';
+    title.setAttribute('dir', dir);
+    desc.setAttribute('dir', dir);
+    title.style.textAlign = lang === 'ar' ? 'right' : 'left';
+    desc.style.textAlign  = lang === 'ar' ? 'right' : 'left';
+
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePortfolioModal() {
+    const modal = document.getElementById('portfolio-modal');
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function handleModalBackdropClick(e) {
+    if (e.target === document.getElementById('portfolio-modal')) {
+      closePortfolioModal();
+    }
+  }
+
+  // Close modal on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closePortfolioModal();
+  });
 
   // ===== STATE =====
   let currentLang = localStorage.getItem('90ag-lang') || 'ar';
@@ -1729,6 +1911,34 @@
     }
   });
 </script>
+
+
+<!-- ================================================================
+     PORTFOLIO MODAL
+================================================================ -->
+<div id="portfolio-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title-el"
+  onclick="handleModalBackdropClick(event)">
+  <div class="modal-inner">
+    <!-- Close button -->
+    <button class="modal-close" id="modal-close-btn" aria-label="Close" onclick="closePortfolioModal()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+        fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+      </svg>
+    </button>
+
+    <!-- Image -->
+    <div class="modal-img-wrap">
+      <img id="modal-img" src="" alt="" />
+    </div>
+
+    <!-- Content -->
+    <div class="p-6 md:p-8">
+      <h3 id="modal-title-el" class="text-xl md:text-2xl font-bold mb-4" style="color:#00d4aa;"></h3>
+      <p id="modal-desc-el" class="modal-description text-gray-300 text-base md:text-lg"></p>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
